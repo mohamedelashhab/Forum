@@ -18,4 +18,11 @@ class ThreadTest extends TestCase
 
         $response->assertStatus(200);
     }
+
+    public function thread_can_add_reply()
+    {
+        $thread = factory('App\Thread')->create();
+        $reply = factory('App\Reply')->create();
+        
+    }
 }

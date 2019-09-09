@@ -2,6 +2,7 @@
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
+use App\Channel;
 use App\Reply;
 use App\Thread;
 use App\User;
@@ -35,6 +36,9 @@ $factory->define(Thread::class, function(Faker $faker){
         'body' => $faker->paragraph,
         'user_id' => function(){
             return factory('App\User')->create()->id;
+        },
+        'channel_id' => function(){
+            return factory('App\Channel')->create()->id;
         }
     ];
 });
@@ -48,5 +52,13 @@ $factory->define(Reply::class, function(Faker $faker){
         'thread_id' => function(){
             return factory('App\Thread')->create()->id;
         }
+    ];
+});
+
+$factory->define(Channel::class, function(Faker $faker){
+    $name = $faker->word;
+    return [
+        'name' => $name,
+        'slug' => $name
     ];
 });

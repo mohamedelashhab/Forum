@@ -26,6 +26,20 @@
                 <a class="navbar-brand" href="{{ url('/') }}">
                     Forum 
                 </a>
+              
+                <div class="navbar-brand">
+                        <li class="nav-item dropdown navbar-brand">
+                                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                 Browse
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="/threads">All Threads</a>
+                                    @if (auth()->check())
+                                        <a class="dropdown-item" href="/threads?by={{auth()->user()->name}}">My Threads</a>
+                                    @endif
+                                </div>
+                        </li>
+                </div>
                 <div class="navbar-brand">
                         <a href="/threads/create">New Thread</a>
                 </div>

@@ -23,6 +23,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        \view()->composer(['threads.create', 'layouts.app'], function ($view) {
+            $view->with('channels', \App\Channel::all());
+        });
+
+        // \View::share('channels', \App\Channel::all());
     }
 }

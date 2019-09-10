@@ -32,6 +32,7 @@
                 @foreach ($replies as $reply)
                     @include('threads.replay') 
                 @endforeach
+                <hr>
             {{$replies->links()}}
         </div>
         <div class="col-md-8">

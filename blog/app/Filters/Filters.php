@@ -18,7 +18,6 @@ abstract class Filters
         $this->builder = $builder;
         
         collect($this->getFilters())->filter(function($filter){
-           
             return method_exists($this, $filter);
         })
         ->each(function($filter, $value){
@@ -49,7 +48,7 @@ abstract class Filters
     {
         //dd(collect($this->filters)->intersect(array_keys($this->request->all())));
         //dd(collect(array_keys($this->request->all()))->only($this->filters));
-        $filters = $this->request->all() ? collect($this->request->all())->flip() :  [];
+        $filters = collect($this->request->all())->flip() ;
         return $filters;
     }
 }

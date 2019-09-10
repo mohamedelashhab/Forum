@@ -10,6 +10,7 @@
                     @foreach ($threads as $thread)                      
                         <article>
                             <a href="{{$thread->path()}}">{{$thread->title}}</a>
+                            <a class="level" href="{{$thread->path()}}"><strong>{{$thread->replies_count}} {{str_plural('reply', $thread->replies_count)}}</strong></a>
                             <div class="body">{{$thread->body}}</div>
                         </article>
                         <hr>

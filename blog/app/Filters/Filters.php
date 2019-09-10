@@ -16,8 +16,9 @@ abstract class Filters
     public function apply($builder)
     {
         $this->builder = $builder;
-
+        
         collect($this->getFilters())->filter(function($filter){
+           
             return method_exists($this, $filter);
         })
         ->each(function($filter, $value){
@@ -32,11 +33,11 @@ abstract class Filters
         //     }
         // }
 
-        if($this->request->has('by'))
-        {
-            $this->by($this->request->by);
-        }
-        return $this->builder;
+        // if($this->request->has('by'))
+        // {
+        //     $this->by($this->request->by);
+        // }
+        // return $this->builder;
     }
 
     public function hasFilter($filter)
@@ -46,6 +47,9 @@ abstract class Filters
 
     public function getFilters()
     {
-        return collect($this->request->only($this->filters))->flip();
+        //dd(collect($this->filters)->intersect(array_keys($this->request->all())));
+        //dd(collect(array_keys($this->request->all()))->only($this->filters));
+        $filters = $this->request->all() ? collect($this->request->all())->flip() :  [];
+        return $filters;
     }
 }

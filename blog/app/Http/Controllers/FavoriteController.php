@@ -8,11 +8,17 @@ use Illuminate\Http\Request;
 
 class FavoriteController extends Controller
 {
-    
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
 
     public function store(Reply $reply)
     {
-        if(! $reply->favorits()->where(['user_id'=>auth()->id()])->exists()) $reply->favorits()->create(['user_id' => auth()->id(),]);
+        
+        if(! $reply->favorites()->where(['user_id'=>auth()->id()])->exists()) $reply->favorites()->create(['user_id' => auth()->id(),]);
+
+        return back();
         
     }
 }

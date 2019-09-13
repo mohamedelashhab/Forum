@@ -7,7 +7,7 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">
-                    <a href="#">{{$thread->creator->name}}</a> posted:
+                    <a href="{{route('profile', $thread->creator->name)}}">{{$thread->creator->name}}</a> posted:
                     {{$thread->title}}
                 </div>
 
@@ -15,7 +15,9 @@
                     {{$thread->body}}
                 </div>
             </div>
+            <hr>
         </div>
+        
 
         <div class="col-md-4">
             <div class="card">
@@ -25,7 +27,9 @@
                     {{str_plural('comment', $thread->replies_count)}}
                 </div>
             </div>
+            
         </div>
+        
 
         <div class="col-md-8">
             

@@ -3,20 +3,28 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">Forum</div>
-
-                <div class="card-body">
-                    @foreach ($threads as $thread)                      
+            @foreach ($threads as $thread)
+                <div class="card">
+                    <div class="card-header">
+                        <div class="level">
+                            <div class="flex">
+                                <a href="{{$thread->path()}}">{{$thread->title}}</a>
+                            </div>
+                            <div>
+                                <a class="level" href="{{$thread->path()}}"><strong>{{$thread->replies_count}} {{str_plural('reply', $thread->replies_count)}}</strong></a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="card-body">                    
                         <article>
-                            <a href="{{$thread->path()}}">{{$thread->title}}</a>
-                            <a class="level" href="{{$thread->path()}}"><strong>{{$thread->replies_count}} {{str_plural('reply', $thread->replies_count)}}</strong></a>
-                            <div class="body">{{$thread->body}}</div>
+                                <div class="body">{{$thread->body}}</div>
+                            
                         </article>
-                        <hr>
-                    @endforeach
+                    </div> 
                 </div>
-            </div>
+                <hr>
+            @endforeach
         </div>
     </div>
 </div>

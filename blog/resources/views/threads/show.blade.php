@@ -1,23 +1,34 @@
 @extends('layouts.app')
 
 @section('content')
+
 <div class="container">
     <div class="row">
-        
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">
-                    <a href="{{route('profile', $thread->creator->name)}}">{{$thread->creator->name}}</a> posted:
-                    {{$thread->title}}
+                    <div class="level">
+                        <div class="flex">
+                            <a href="{{route('profile', $thread->creator->name)}}">{{$thread->creator->name}}</a> posted:
+                            {{$thread->title}}
+                        </div>
+                        <div>
+                            <form action="{{route('thread.delete',[$thread->channel ,$thread])}}" method="post">
+                                {{ csrf_field() }}
+                                {{ method_field('DELETE') }}
+                                <button type="submit" class="btn btn-link">Delete</button>  
+                            </form>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="card-body">
                     {{$thread->body}}
                 </div>
+                
             </div>
             <hr>
         </div>
-        
 
         <div class="col-md-4">
             <div class="card">
@@ -26,19 +37,17 @@
                     <a href="#">{{$thread->creator->name}}</a> and has currently {{$thread->replies_count}}
                     {{str_plural('comment', $thread->replies_count)}}
                 </div>
-            </div>
-            
+            </div>  
         </div>
-        
 
         <div class="col-md-8">
-            
                 @foreach ($replies as $reply)
                     @include('threads.replay') 
                 @endforeach
                 <hr>
             {{$replies->links()}}
         </div>
+
         <div class="col-md-8">
             @if (auth()->check())
                 
@@ -57,6 +66,6 @@
         </div>
 
     </div>
-
 </div>
+
 @endsection

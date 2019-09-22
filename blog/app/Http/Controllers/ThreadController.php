@@ -43,9 +43,8 @@ class ThreadController extends Controller
     }
 
   
-    public function show($channel,Thread $thread)
+    public function show(Channel $channel, Thread $thread)
     {
-        
         return view('threads.show', [
             'thread' => $thread,
             'replies' => $thread->replies()->paginate(5)
@@ -55,19 +54,26 @@ class ThreadController extends Controller
   
     public function edit(Thread $thread)
     {
-        //
+        
     }
 
 
     public function update(Request $request, Thread $thread)
     {
-        //
+        
     }
 
 
-    public function destroy(Thread $thread)
+    public function destroy(Channel $channel, Thread $thread)
     {
-        //
+        if(request()->wantsJson())
+        {
+            return response([], 204);
+        }
+
+        $thread->delete();
+
+        return redirect('/threads');
     }
 
     public function getThreads($channel, $filters)
@@ -78,9 +84,6 @@ class ThreadController extends Controller
             $threads->where('channel_id', $channel->id);
         }
   
-        
         return $threads->get();
-
-        
     }
 }

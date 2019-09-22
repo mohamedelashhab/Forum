@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Reply extends Model
 {
-    use Favoritable;
+    use Favoritable, RecordsActivity;
     protected $fillable = ['body', 'thread_id', 'user_id'];
     protected $with = ['favorites','owner'];
 
@@ -15,7 +15,11 @@ class Reply extends Model
         return $this->belongsTo('App\User', 'user_id');
     }
 
-    
+    public function thread()
+    {
+        return $this->belongsTo(Thread::class);
+    }
+
 
     
 }

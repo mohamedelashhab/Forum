@@ -20,6 +20,4 @@ class Reply extends Model
         return $this->belongsTo(Thread::class);
     }
 
-
-    
 }

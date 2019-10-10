@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 
 class Reply extends Model
 {
@@ -23,6 +24,12 @@ class Reply extends Model
     public function path()
     {
         return $this->thread->path()."#reply-{$this->id}";
+    }
+
+    protected $appends = ['favoritesCount', 'isFavorited']; 
+
+    public function unfavorite(){
+        $this->favorites()->where(['user_id' => auth()->id()])->delete();
     }
 
 }

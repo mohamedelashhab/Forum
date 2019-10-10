@@ -1,6 +1,7 @@
 
 
 <script>
+    import Favorite from './Favorite';
     export default {
         props: ['reply'],
         data() {
@@ -10,6 +11,10 @@
                 body: this.reply.body,
             }
             
+        },
+
+        components : {
+            favorite: Favorite,
         },
 
         methods: {

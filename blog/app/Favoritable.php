@@ -18,4 +18,9 @@ trait Favoritable
     {
         return $this->favorites->count();
     }
+
+    public function getIsFavoritedAttribute(){
+        return $this->isFavorited();
+    }
+ 
 }

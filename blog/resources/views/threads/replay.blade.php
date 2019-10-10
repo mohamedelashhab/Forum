@@ -9,11 +9,12 @@
                         <a href="{{route('profile', $reply->owner->name)}}">{{$reply->owner->name}} </a>said {{ $reply->created_at->diffForHumans()}}
                     </div>
                     <div>
-                        <form action="{{route('favorite', $reply->id)}}" method="post">
+                        <favorite :reply="{{$reply}}"></favorite>
+                        {{-- <form action="{{route('favorite', $reply->id)}}" method="post">
                             @csrf
                             <button type="submit" class="btn btn-primary" {{$reply->isFavorited() ? 'disabled': ''}} >
                                 {{$reply->favorites_count}} {{str_plural('Favorite', $reply->favorites_count)}}</button>
-                        </form>
+                        </form> --}}
                     </div>
                 </div>
             </div>

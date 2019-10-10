@@ -60,7 +60,7 @@
                             <label for="reply"></label>
                             <textarea id="reply" class="form-control" name="body" placeholder="Have something to say" rows="5"></textarea>
                         </div>
-                        <button type="submit" class="btn btn-default">post</button>
+                        <button type="submit" class="btn btn-primary">post</button>
                     </form>
                 
             @else

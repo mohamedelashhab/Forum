@@ -7,6 +7,8 @@
 require('./bootstrap');
 
 window.Vue = require('vue');
+import Reply from './components/Reply.vue';
+import Flash from './components/Flash.vue';
 
 /**
  * The following block of code may be used to automatically register your
@@ -19,7 +21,10 @@ window.Vue = require('vue');
 // const files = require.context('./', true, /\.vue$/i);
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default));
 
-Vue.component('flash', require('./components/Flash.vue').default);
+// Vue.component('flash', require('./components/Flash.vue'));
+// Vue.component('reply', require('./components/Reply.vue'));
+Vue.component('reply', Reply);
+Vue.component('flash', Flash);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

@@ -28,6 +28,16 @@
             [v-cloak] { display: none; }
             
     </style>
+
+    <script>
+    window.App = {!!
+        json_encode([
+            'user' => Auth::user(),
+            'signedIn' => Auth::check(),
+            'csrfToken' => csrf_token(),
+        ])    
+    !!}
+    </script>
 </head>
 
 

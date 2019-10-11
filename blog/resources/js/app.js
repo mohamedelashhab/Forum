@@ -7,8 +7,9 @@
 require('./bootstrap');
 
 window.Vue = require('vue');
-import Reply from './components/Reply.vue';
+
 import Flash from './components/Flash.vue';
+import Thread from './pages/Thread.vue';
 
 /**
  * The following block of code may be used to automatically register your
@@ -23,9 +24,9 @@ import Flash from './components/Flash.vue';
 
 // Vue.component('flash', require('./components/Flash.vue'));
 // Vue.component('reply', require('./components/Reply.vue'));
-Vue.component('reply', Reply);
-Vue.component('flash', Flash);
 
+Vue.component('flash', Flash);
+Vue.component('thread-view', Thread);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application

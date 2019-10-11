@@ -28,7 +28,7 @@ class ReplyController extends Controller
         $this->authorize('update', $reply);
         $reply->delete();
         if(request()->expectsJson()){
-            return response('reply deleted', 404);
+            return response('reply deleted');
         }
         return back();
     }

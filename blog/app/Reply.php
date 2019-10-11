@@ -28,8 +28,6 @@ class Reply extends Model
 
     protected $appends = ['favoritesCount', 'isFavorited']; 
 
-    public function unfavorite(){
-        $this->favorites()->where(['user_id' => auth()->id()])->delete();
-    }
+    
 
 }

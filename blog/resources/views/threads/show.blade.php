@@ -47,26 +47,11 @@
             </div>
 
             <div class="col-md-8">
-                <replies :data = "{{$replies}}" @removed="repliesCount--"> </replies>
+                <replies :data = "{{$replies}}" @removed="repliesCount--" @add="repliesCount++"> </replies>
 
             </div>
 
-            <div class="col-md-8">
-                @if (auth()->check())
-                    
-                        <form action="{{$thread->path() . '/replies'}}" method="POST">
-                            @csrf
-                            <div class="form-group">
-                                <label for="reply"></label>
-                                <textarea id="reply" class="form-control" name="body" placeholder="Have something to say" rows="5"></textarea>
-                            </div>
-                            <button type="submit" class="btn btn-primary">post</button>
-                        </form>
-                    
-                @else
-                <div class="col-md-8"> <p class="text-center"> please <a href="{{route('login')}}">login</a> to participate in this discussion </p> </div>
-                @endif
-            </div>
+            
 
         </div>
     </div>

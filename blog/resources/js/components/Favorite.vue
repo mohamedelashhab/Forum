@@ -3,7 +3,7 @@
 
         <button type="submit" :class="classes" @click="toggle()">
             <span class="glyphicon glyphicon-heart"></span>
-            <span v-text="count"></span>
+            <span class="badge badge-primary" v-text="count"></span>
         </button>
     </div>
 
@@ -20,7 +20,7 @@ export default {
     },
     computed: {
         classes(){
-            return ["btn", this.active? "btn-danger" : "btn-primary"];
+            return ["btn", this.active? "btn-danger" : "btn-default"];
         },
         endpoint() {
             return '/replies/' + this.reply.id + '/favorites';

@@ -26,6 +26,8 @@ class Reply extends Model
         return $this->thread->path()."#reply-{$this->id}";
     }
 
+
+
     protected $appends = ['favoritesCount', 'isFavorited']; 
 
     

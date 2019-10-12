@@ -69,7 +69,7 @@
         methods: {
             update() {
                 
-                // alert(this.body);
+               
                 axios.patch('/replies/' + this.data.id, {
                     body:this.body,
                 });
@@ -79,9 +79,9 @@
             destroy(){
                 axios.delete('/replies/' + this.data.id);
                 this.$emit('deleted', this.data.id);
-            //     $(this.$el).fadeOut(300, function () {
-            //     flash('Your reply has been deleted.');
-            // });
+                $(this.$el).fadeOut(300, function () {
+                flash('Your reply has been deleted.');
+            });
             }
         }
     }

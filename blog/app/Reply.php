@@ -8,6 +8,18 @@ use Illuminate\Support\Facades\Auth;
 class Reply extends Model
 {
     use Favoritable, RecordsActivity;
+
+    protected static function boot()
+    {
+        parent::boot();
+        static::creating(function($reply){
+            $reply->thread()->increment('replies_count');
+        });
+
+        static::deleting(function($thread){
+            $thread->decrement('replies_count');
+        });
+    }
     protected $fillable = ['body', 'thread_id', 'user_id'];
     protected $with = ['favorites','owner'];
 

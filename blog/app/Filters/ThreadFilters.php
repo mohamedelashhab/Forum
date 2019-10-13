@@ -8,7 +8,7 @@ use Illuminate\Http\Request;
 class ThreadFilters extends Filters
 {
 
-    protected $filters = ['by', 'popular'];
+    protected $filters = ['by', 'popular', 'unanswered'];
 
 
     public function by($username)

@@ -7,6 +7,7 @@
                     <span class="sr-only">Previous</span>
                 </a>
             </li>
+            <li class="page-item" v-for="pagNum in dataSet.last_page"><a class="page-link"  @click="getPage(pagNum)">{{pagNum}}</a></li>
             <li class="page-item" v-show="nextUrl">
                 <a class="page-link" href="#" aria-label="Next" @click.prevent="page++">
                     <span aria-hidden="true">Next &raquo;</span>
@@ -49,7 +50,16 @@ export default {
         },
         updateUrl(){
             history.pushState(null, null, '?page=' + this.page);
+
+        },
+        getPage(pagNum){
+            this.page = pagNum;
+
         }
     },
 }
 </script>
+
+<style lang="">
+
+</style>

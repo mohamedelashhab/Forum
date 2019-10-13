@@ -28,5 +28,8 @@ Route::delete('threads/{channel}/{thread}', 'ThreadController@destroy')->name('t
 Route::delete('replies/{reply}', 'ReplyController@destroy')->name('reply.destroy');
 Route::patch('replies/{reply}', 'ReplyController@update')->name('reply.update');
 Route::delete('replies/{reply}/favorites', 'FavoriteController@destroy')->name('favorite.destroy');
+Route::post('/threads/{channel}/{thread}/subscribtions', 'ThreadSubscribtionController@store')->middleware('auth');
+Route::delete('/threads/{channel}/{thread}/subscribtions', 'ThreadSubscribtionController@destroy')->middleware('auth');
+
 
 

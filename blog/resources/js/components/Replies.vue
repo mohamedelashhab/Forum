@@ -42,8 +42,8 @@ export default {
             }
             axios.get(this.url(page))
             .then((response) => {
-
-               response.data.data.length >= 1 ? this.refresh(response) : this.reload();
+                console.log(response);
+                response.data.data.length > 0 ? this.refresh(response) : this.reload();
 
             });
         },
@@ -57,7 +57,9 @@ export default {
 
         reload(){
             history.pushState(null, null, '?page=' + 1);
-            location.reload();
+
+            fetch(1);
+            
         }
         
     }

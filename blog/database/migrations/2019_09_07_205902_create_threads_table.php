@@ -18,6 +18,7 @@ class CreateThreadsTable extends Migration
             $table->string('title');
             $table->text('body');
             $table->integer('user_id');
+            $table->integer('replies_count')->default(0);
             $table->timestamps();
         });
     }

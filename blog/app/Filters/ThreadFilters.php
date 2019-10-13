@@ -25,5 +25,10 @@ class ThreadFilters extends Filters
         return $this->builder->orderBy('replies_count', 'desc');
     }
 
+    public function unanswered()
+    {
+       return $this->builder->where('replies_count', 0);
+    }
+
     
 }

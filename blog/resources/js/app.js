@@ -10,6 +10,7 @@ window.Vue = require('vue');
 
 import Flash from './components/Flash.vue';
 import Thread from './pages/Thread.vue';
+import Paginator from './components/Paginator.vue'
 
 /**
  * The following block of code may be used to automatically register your
@@ -27,6 +28,7 @@ import Thread from './pages/Thread.vue';
 
 Vue.component('flash', Flash);
 Vue.component('thread-view', Thread);
+Vue.component('paginator', Paginator);
 /**
  * Next, we will create a fresh Vue application instance and attach it to
  * the page. Then, you may begin adding components to this application

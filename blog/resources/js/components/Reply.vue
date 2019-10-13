@@ -5,7 +5,7 @@
                 <div  class="card-header">
                     <div class="level">
                         <div class="flex">
-                            <a :href="'profile'+ data.owner.name" v-text="data.owner.name"></a>said {{ data.created_at}}
+                            <a :href="'profile'+ data.owner.name" v-text="data.owner.name"></a> said <span v-text="ago"></span> 
                         </div>
                         <div>
                       
@@ -40,6 +40,7 @@
 
 <script>
     import Favorite from './Favorite';
+    import moment from 'moment';
     export default {
         props: ['data'],
         data() {
@@ -48,12 +49,14 @@
                 editing: false,
                 body: this.data.body,
                 id: this.data.id,
+                
             }
             
         },
 
         components : {
             favorite: Favorite,
+            
 
         },
 
@@ -63,6 +66,9 @@
             },
             canUpdate(){
                 return this.authorize(user => user.id == this.data.user_id);
+            },
+            ago(){
+                return moment(this.data.updated_at).fromNow();
             }
         },
 

@@ -47,7 +47,7 @@
             </div>
 
             <div class="col-md-8">
-                <replies :data = "{{$replies}}" @removed="repliesCount--" @add="repliesCount++"> </replies>
+                <replies @removed="repliesCount--" @add="repliesCount++"> </replies>
 
             </div>
 

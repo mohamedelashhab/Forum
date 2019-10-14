@@ -45,6 +45,7 @@ class ThreadController extends Controller
   
     public function show(Channel $channel, Thread $thread)
     {
+        // dd($thread);
         return view('threads.show', [
             'thread' => $thread,
         ]);

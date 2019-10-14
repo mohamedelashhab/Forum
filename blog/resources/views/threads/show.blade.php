@@ -35,13 +35,14 @@
                 </div>
                 <hr>
             </div>
-
+            
             <div class="col-md-4">
                 <div class="card">
                     <div class="card-body">
                         This thread was published {{$thread->created_at->diffForHumans()}} by
                         <a href="#">{{$thread->creator->name}}</a> and has currently <span v-text="repliesCount"></span>
-                        {{str_plural('comment', $thread->replies_count)}}  <subscribe-button :flag="{{ json_encode($thread->isSubscribedTo) }}"></subscribe-button>
+                        {{str_plural('comment', $thread->replies_count)}}  
+                        <subscribe-button :flag="{{ json_encode([$thread->isSubscribedTo]) }}"></subscribe-button>
                     </div>
                     
                 </div>  

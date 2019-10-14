@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Notifications\ThreadWasUpdated;
 use Illuminate\Database\Eloquent\Model;
 
 class Thread extends Model
@@ -10,14 +11,15 @@ class Thread extends Model
     use RecordsActivity;
 
     protected $fillable = ['title', 'body', 'user_id','channel_id'];
+    protected $appends  = ['isSubscribedTo'];
     
 
     protected static function boot()
     {
         parent::boot();
-        static::addGlobalScope('replyCount', function($builder){
-            $builder->withCount('replies');
-        });
+        // static::addGlobalScope('replyCount', function($builder){
+        //     $builder->withCount('replies');
+        // });
 
         static::deleting(function($thread){
             $thread->replies->each->delete();
@@ -42,7 +44,12 @@ class Thread extends Model
 
     public function addReply($reply)
     {
-        return $this->replies()->create($reply);
+        $this->replies()->create($reply);
+        $this->subscribtions()->filter(function($sub) use ($reply){
+            return auth()->id != $reply->user_id;
+        })->each->notify($reply);
+
+        return $reply;
     }
 
     public function channel()
@@ -65,6 +72,8 @@ class Thread extends Model
          $this->subscribtions()->create([
             'user_id' => auth()->id() ? : 1,  
         ]);
+
+        return $this;
     }
 
     public function unsubscribe()
@@ -74,6 +83,12 @@ class Thread extends Model
 
     public function getIsSubscribedToAttribute()
     {
-        return $this->subscribtions()->where('user_id', auth()->id())->exists();
+        return $this->subscribtions()
+            ->where('user_id', auth()->id())
+            ->exists();
     }
+
+   
+
+    
 }

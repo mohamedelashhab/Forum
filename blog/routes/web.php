@@ -30,6 +30,12 @@ Route::patch('replies/{reply}', 'ReplyController@update')->name('reply.update');
 Route::delete('replies/{reply}/favorites', 'FavoriteController@destroy')->name('favorite.destroy');
 Route::post('/threads/{channel}/{thread}/subscribtions', 'ThreadSubscribtionController@store')->middleware('auth');
 Route::delete('/threads/{channel}/{thread}/subscribtions', 'ThreadSubscribtionController@destroy')->middleware('auth');
+Route::get('profiles/{user}/notifications', 'NotificationController@index');
+Route::delete('profiles/{user}/notifications/{notification}', 'NotificationController@destroy');
+
+
+
+
 
 
 

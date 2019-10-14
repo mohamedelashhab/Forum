@@ -20,7 +20,7 @@ class ThreadWasUpdated extends Notification
      *
      * @return void
      */
-    public function __construct(Thread $thread,Reply $reply)
+    public function __construct($thread, $reply)
     {
         $this->thread = $thread;
         $this->reply = $reply;

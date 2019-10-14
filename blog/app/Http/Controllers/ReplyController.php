@@ -27,7 +27,7 @@ class ReplyController extends Controller
         ]);
 
         if(request()->expectsJson()){
-            return $reply->load(['owner']);
+            return $reply->load('owner');
         }
 
         return back()->with('flash', 'reply created successfully');

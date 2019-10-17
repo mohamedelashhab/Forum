@@ -12,7 +12,7 @@
                 <i class="fas fa-bell"></i>
                 </a>
                 <div class="dropdown-menu dropdown-menu-lg-right dropdown-secondary" aria-labelledby="navbarDropdownMenuLink-5">
-                <a class="dropdown-item waves-effect waves-light" :href="notification.data.link" v-for="notification in notifications" @click="markAsRead(notification)">{{notification.data.message}} 
+                <a class="dropdown-item waves-effect waves-light" :href="notification.data.link" v-for="notification in notifications" :key="notification.id" @click="markAsRead(notification)">{{notification.data.message}} 
                 <span class="badge badge-danger ml-2"></span></a>
                 <!-- <a class="dropdown-item waves-effect waves-light" href="#">Another action <span class="badge badge-danger ml-2">1</span></a>
                 <a class="dropdown-item waves-effect waves-light" href="#">Something else here <span class="badge badge-danger ml-2">4</span></a> -->

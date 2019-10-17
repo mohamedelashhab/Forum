@@ -56462,6 +56462,7 @@ var render = function() {
                     return _c(
                       "a",
                       {
+                        key: notification.id,
                         staticClass: "dropdown-item waves-effect waves-light",
                         attrs: { href: notification.data.link },
                         on: {

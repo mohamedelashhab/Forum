@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Inspections\Spam;
 use App\Reply;
 use App\Thread;
 use Illuminate\Broadcasting\Channel;
@@ -9,9 +10,12 @@ use Illuminate\Http\Request;
 
 class ReplyController extends Controller
 {
-    public function __construct()
+
+    private $spam;
+    public function __construct(Spam $spam)
     {
         $this->middleware('auth')->except('index');
+        $this->spam = $spam;
     }
 
     public function index($channel, Thread $thread)
@@ -21,6 +25,12 @@ class ReplyController extends Controller
     
     public function store($channel,Thread $thread)
     {
+        request()->validate([
+            'body' => 'required',
+        ]);
+
+    $this->spam->detect(request('body'))
+
         $reply = $thread->addReply([
             'body' => request('body'),
             'user_id' => auth()->id()
@@ -47,6 +57,7 @@ class ReplyController extends Controller
     {
         $this->authorize('update', $reply);
         $this->validate(request(), ['body' => 'required']);
+        $this->spam->detect(request('body'));
         $reply->update(request(['body']));
     }
 

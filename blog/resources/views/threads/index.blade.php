@@ -8,7 +8,13 @@
                     <div class="card-header">
                         <div class="level">
                             <div class="flex">
-                                <a href="{{$thread->path()}}">{{$thread->title}}</a>
+                                @if(auth()->user() && $thread->hasUpdatesFor(auth()->user()))
+                                    <strong>
+                                            <a href="{{$thread->path()}}">{{$thread->title}}</a>
+                                    </strong>
+                                @else
+                                    <a href="{{$thread->path()}}">{{$thread->title}}</a>
+                                @endif
                             </div>
                             <div>
                                 <a class="level" href="{{$thread->path()}}"><strong>{{$thread->replies_count}} {{str_plural('reply', $thread->replies_count)}}</strong></a>

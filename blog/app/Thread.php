@@ -2,6 +2,7 @@
 
 namespace App;
 
+use App\Inspections\Spam;
 use App\Notifications\ThreadWasUpdated;
 use App\Providers\ThreadReplyAdded;
 use Illuminate\Database\Eloquent\Model;
@@ -46,6 +47,7 @@ class Thread extends Model
 
     public function addReply($reply)
     {
+    
         $reply = $this->replies()->create($reply);
         // Prepare notifications for all subscribers.
         event(new ThreadReplyAdded($this, $reply));
@@ -96,6 +98,12 @@ class Thread extends Model
         ->where('user_id', '!=', $reply->user_id)
         ->each
         ->notify($reply);
+    }
+
+    public function hasUpdatesFor($user)
+    {
+        $key  = $user->visitedThreadCacheKey($this);
+        return $this->updated_at > cache($key);
     }
 
    

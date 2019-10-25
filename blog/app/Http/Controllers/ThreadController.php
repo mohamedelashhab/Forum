@@ -4,11 +4,18 @@ namespace App\Http\Controllers;
 
 use App\Channel;
 use App\Filters\ThreadFilters;
+use App\Inspections\Spam;
 use App\Thread;
 use Illuminate\Http\Request;
 
 class ThreadController extends Controller
 {
+
+    private $spam;
+    public function __construct(Spam $spam)
+    {
+        $this->spam = $spam;
+    }
     
     public function index(Channel $channel, ThreadFilters $filters)
     {
@@ -31,6 +38,8 @@ class ThreadController extends Controller
             'body' => 'required',
             'channel_id' => 'required|exists:channels,id'
         ]);
+
+        $this->spam->detect(request('body'));
         
         $thread = Thread::create([
             'user_id' => auth()->id(),
@@ -45,7 +54,9 @@ class ThreadController extends Controller
   
     public function show(Channel $channel, Thread $thread)
     {
-        // dd($thread);
+        if(auth()->user()){
+            auth()->user()->read($thread);
+        }
         return view('threads.show', [
             'thread' => $thread,
         ]);

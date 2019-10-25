@@ -49,6 +49,7 @@
                 editing: false,
                 body: this.data.body,
                 id: this.data.id,
+                oldBody: this.data.body,
                 
             }
             
@@ -75,12 +76,17 @@
         methods: {
             update() {
                 
-               
-                axios.patch('/replies/' + this.data.id, {
-                    body:this.body,
-                });
-                this.editing = false;
-                flash('Updated!');
+                axios.patch('/replies/' + this.data.id, {body:this.body})
+                .then((res)=>{
+                    this.editing = false;
+                    flash('Updated!', 'success');
+                })
+                .catch((err) => {
+                    this.body = this.oldBody;
+                    console.log(this.body);
+                    flash("your reply contains spam", 'danger');
+                })
+                
             },
             destroy(){
                 axios.delete('/replies/' + this.data.id);

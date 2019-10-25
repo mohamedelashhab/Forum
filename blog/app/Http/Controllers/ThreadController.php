@@ -11,10 +11,8 @@ use Illuminate\Http\Request;
 class ThreadController extends Controller
 {
 
-    private $spam;
-    public function __construct(Spam $spam)
+    public function __construct()
     {
-        $this->spam = $spam;
     }
     
     public function index(Channel $channel, ThreadFilters $filters)
@@ -34,12 +32,12 @@ class ThreadController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'title' => 'required',
-            'body' => 'required',
+            'title' => 'required|spamfree',
+            'body' => 'required|spamfree',
             'channel_id' => 'required|exists:channels,id'
         ]);
 
-        $this->spam->detect(request('body'));
+        // $this->spam->detect(request('body'));
         
         $thread = Thread::create([
             'user_id' => auth()->id(),

@@ -22,11 +22,16 @@ export default {
     },
     methods: {
         addReply(){
-            axios.post(this.endpoint, {body: this.body}).then((response)=>{
+            axios.post(this.endpoint, {body: this.body})
+            
+            .then((response)=>{
                 this.body = '';
                 this.$emit('added', response.data);
                 flash('success , Reply added');
                 
+            })
+            .catch((err)=> {
+                flash("your reply contains spam", 'danger');
             });
         },
         signedIn(){

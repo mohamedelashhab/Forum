@@ -11,11 +11,11 @@ use Illuminate\Http\Request;
 class ReplyController extends Controller
 {
 
-    private $spam;
-    public function __construct(Spam $spam)
+   
+    public function __construct()
     {
         $this->middleware('auth')->except('index');
-        $this->spam = $spam;
+       
     }
 
     public function index($channel, Thread $thread)
@@ -25,22 +25,32 @@ class ReplyController extends Controller
     
     public function store($channel,Thread $thread)
     {
-        request()->validate([
-            'body' => 'required',
-        ]);
+       
 
-    $this->spam->detect(request('body'))
 
-        $reply = $thread->addReply([
-            'body' => request('body'),
-            'user_id' => auth()->id()
-        ]);
+        try{   
 
-        if(request()->expectsJson()){
+            request()->validate([
+                'body' => 'required|spamfree',
+            ]);
+
+            $this->spam->detect(request('body'));
+
+            $reply = $thread->addReply([
+                'body' => request('body'),
+                'user_id' => auth()->id()
+            ]);
+
             return $reply->load('owner');
+
+    
+        }catch(\Exception $e)
+        {
+
+            return response()->json("your reply contains spam", 422);
         }
 
-        return back()->with('flash', 'reply created successfully');
+    
     }
 
     public function destroy(Reply $reply)
@@ -55,10 +65,17 @@ class ReplyController extends Controller
 
     public function update(Reply $reply)
     {
-        $this->authorize('update', $reply);
-        $this->validate(request(), ['body' => 'required']);
-        $this->spam->detect(request('body'));
-        $reply->update(request(['body']));
+        
+        try{
+            $this->authorize('update', $reply);
+            $this->validate(request(), ['body' => 'required|spamfree']);
+            // $this->spam->detect(request('body'));
+            $reply->update(request(['body']));
+        }catch(\Exception $e){
+            return response()->json("Sorry, your reply could not be saved at this time", 422);
+        }
+        
+        
     }
 
 }
